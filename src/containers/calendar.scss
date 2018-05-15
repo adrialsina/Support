@@ -6,4 +6,42 @@
 }
 .rows .row {
     display: inline-block;
+    width: 250;
+ }
+
+ h2 {
+ 	position:absolute;
+ 	left: 1400;
+ 	font-size:90%;
+ 	top: 230;
+ }
+ h3 {
+ 	font-size: 170%;
+ }
+ .size {
+   font-size: 20px;
+   height: 50px;
+   font-family:"Times New Roman";	
+ }
+
+ .loc1 {
+ 	position:absolute;
+   left: 650;	
+   width: 175;
+   height: 175;
+   top: 230;
+ }
+ .loc2 {
+ 	position:absolute;
+   left: 829;	
+   width: 350;
+   height: 350;
+   top: 230;
+ }
+ .loc3 {
+ 	position:absolute;
+   left: 1189;	
+   width: 175;
+   height: 175;
+   top: 230;
  }

@@ -5,9 +5,18 @@ import * as TYPES from './types';
 
 export function conectar(place) {
 	console.log("In", place);
-  const request = axios.get(`${ROOT_URL}/result?d=${place.Day}&w=${place.Word}&m=${place.Moment}&dt=${place.Date}&p=${place.Place}`);
+  const request = axios.get(`${ROOT_URL}/result?d=${place.Day}&w=${place.Word}&m=${place.Moment}&dt=${place.Date}&p=${place.Place}&hr=${place.HeartRate}`);
   return {
     type: TYPES.conectar, 
+    payload: request
+  };
+}
+
+export function conect_disp(winner) {
+console.log("EOOO", winner);
+  const request = axios.get(`${ROOT_URL}/display?url=${winner}`);
+  return {
+    type: TYPES.conect_disp, 
     payload: request
   };
 }

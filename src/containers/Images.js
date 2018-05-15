@@ -1,12 +1,54 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { conectar } from '../actions/index'
+import { conect_disp } from '../actions/index'
 import { ReactRpg } from 'react-rpg';
 import './calendar.scss';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import './react-confirm-alert.scss'; // Import css
+
  
 class Images extends React.Component {
 
+      message (u) {
+          confirmAlert({
+            title: 'Confirm to submit',
+            message: 'Are you sure to do this?',
+            buttons: [
+              {
+                label: 'Yes',
+                onClick: () => this.submit(u)
+              },
+              {
+                label: 'No'
+              }
+            ]
+          })
+        };
+
+      noImage (props) {
+        const theresImage = props.theresImage;
+        console.log("AIX", theresImage);
+        if(props.theresImage){
+          
+          confirmAlert({
+            title: 'No image for the search',
+            message: 'Click okey for do another search',
+            buttons: [
+              {
+                label: 'Yes'
+              }
+            ]
+          })}
+        };
+
+      submit(u) {
+            console.log("AIXO", u);
+            this.props.conect_disp(u);
+          }
+        
+
   render() {
+
 
     let images1 = [];
     let images2 = [];
@@ -16,14 +58,14 @@ class Images extends React.Component {
     this.props.images_main ? this.props.images_main.map((image2)=>{
           images2.push({
           url:image2,
-          clickHandler: (url, obj) => { console.log(obj) }
+          clickHandler: (url, obj) => this.message(url)
        });
      }) : [];
 
     this.props.images_prev ? this.props.images_prev.map((image1)=>{
           images1.push({
           url:image1,
-          clickHandler: (url, obj) => { console.log(obj) }
+          clickHandler: (url, obj) => { console.log(url) }
        });
      }) : [];
 
@@ -34,27 +76,90 @@ class Images extends React.Component {
        });
      }) : [];
 
-      let array = []
+      let array3 = []      
+      let array2 = []
+      let array1 = []
+      array1.push(images1)
+      array2.push(images2)
+      array3.push(images3)
+      console.log("ggg", array3[0].length);
 
-      array.push(images1,images2,images3)
+      if(array3[0].length == 1){
+
+        return(
+          confirmAlert({
+            title: 'No image for the search',
+            message: 'Click okey for do another search',
+            buttons: [
+              {
+                label: 'Yes'
+              }
+            ]
+          })
+          );
+      }else{
+        console.log("ggg", array3[0]);
     
         return (
           
-            <div className='rows'>
-              {array.map((a)=>{
+          <div>
+ 
+            <div className = "loc1" >
+              {array1.map((a)=>{
 
               
                 return(
-                    <div className='row' >
+                    <div  >
+                      <div  >
                   
-                      <ReactRpg imagesArray={a} columns={[ 1, 1, 1]} padding={23} />
+                      <ReactRpg imagesArray={a} columns={[ 1, 1, 1]} padding={13} />
                       
+                      </div>
+                      <div style={{marginTop: 30}}>
+                      </div>
                     </div>
-                  )
+                  );
               })}  
             </div>
+            <div className = "loc2" >
+              {array2.map((a)=>{
+
+              
+                return(
+                  <div  >
+                    <div  >
+                  
+                      <ReactRpg imagesArray={a} columns={[ 1, 1, 1]} padding={13} />
+                      
+                    </div>
+                    <div style={{marginTop: 30}}>
+                    </div>
+                  </div>
+                  );
+              })}  
+            </div>
+            <div className = "loc3" >
+              {array3.map((a)=>{
+
+              
+                return(
+                    <div  >
+                      <div  >
+                  
+                      <ReactRpg imagesArray={a} columns={[ 1, 1, 1]} padding={13} />
+                      
+                      </div>
+                      <div style={{marginTop: 30}}>
+                      </div>
+                    </div>
+                  );
+              })}  
+            </div>
+          </div>
+          
 
         );
+      }   
   }
 }
 
@@ -66,4 +171,4 @@ function mapStateToProps(state) {
          };
 }
 
-export default connect(mapStateToProps, { conectar })(Images);
+export default connect(mapStateToProps, { conect_disp })(Images);

@@ -8,7 +8,9 @@ import Calendar from "./Calendar"
 import Dayweek from "./Dayweek"
 import Heartrate from "./Heartrate"
 import Images from "./Images"
+import Text from "./Text"
 import { conectar, info } from '../actions/index'
+import './calendar.scss'
 
 class Layout extends Component{
   constructor (props) {
@@ -18,7 +20,8 @@ class Layout extends Component{
       Word:'',
       Moment:'',
       Date:'',
-      Place:''
+      Place:'',
+      HeartRate:''
 
     };
   }
@@ -29,7 +32,8 @@ class Layout extends Component{
       Word: this.state.Word,
       Moment: this.state.Moment,
       Date: this.state.Date,
-      Place: this.state.Place
+      Place: this.state.Place,
+      HeartRate: this.state.HeartRate
     }
     console.log("AIXO", obj);
     this.props.conectar(obj);
@@ -65,6 +69,12 @@ class Layout extends Component{
     });
   }
 
+  OnChangeParams5(New){
+    this.setState({
+      HeartRate: New,
+    });
+  }
+
   render() {
 
       
@@ -85,7 +95,7 @@ class Layout extends Component{
             <Checkbox sendCheck1={this.OnChangeParams2.bind(this)} sendCheck2={this.OnChangeParams4.bind(this)}/>
             </div>
             <div style={{marginTop:60}}>
-            <Heartrate />
+            <Heartrate sendRate={this.OnChangeParams5.bind(this)}/>
             </div> 
             <div style={{marginTop:40}}>
             <button
@@ -96,8 +106,11 @@ class Layout extends Component{
             </div>
           </div>         
         </div>
-        <div style={{marginLeft:330, marginTop:50}}>
-          <Images />
+        <div >
+          <div style={{marginLeft:340}} >
+              <Images />
+              <h2><Text /></h2>
+          </div>
         </div>
       </div>
     );
@@ -113,82 +126,3 @@ function mapStateToProps(state) {
 
 
 
-//AQUI
-
-// import React, {Component} from 'react';
-// import { connect } from 'react-redux';
-// import { bindActionCreators } from 'redux'; //la que envia funcio a tots els reducers
-// import { ReactRpg } from 'react-rpg';
-// import SearchBar from "./SearchBar"
-// import Checkbox from "./Checkbox"
-// import Calendar from "./Calendar"
-// import Dayweek from "./Dayweek"
-// import Heartrate from "./Heartrate"
-// import Images from "./Images"
-// import { conectar } from '../actions/index'
-
-// class Layout extends Component{
-//   constructor (props) {
-//     super();
-//     this.state = {
-//       username: ''
-//     }
-//   }
-
-//   whenChange(){
-//     this.props.onChange(this.state.username);
-//   }
-  
-//   submit() {
-    
-//     this.props.conectar(obj);
-//     console.log(obj);
-//     };
-
-
-//   render() {
-
-//     let obj ={
-//       username: this.state.username
-//     }
-    
-//     return (
-
-//       <div>
-//       <div style={{marginTop:60, textAlign: 'center'}}>
-//         <h1>ImageBrowser LSC - 2018 </h1>
-//       </div>
-//         <div style={{margin:20, marginTop:120}}>
-//           <SearchBar/>
-//           <div style={{marginTop:50, float:'left'}}>
-//             <Dayweek />
-//             <div style={{marginTop:60}}>
-//             <Calendar />
-//             </div>
-//             <div style={{marginTop:60}}>
-//             <Checkbox />
-//             </div>
-//             <div style={{marginTop:60}}>
-//             <Heartrate />
-//             </div>
-//             <div style={{marginTop:60}}>
-//             <button
-//             type='submit'
-//             onClick={this.whenChange.bind(this)}
-//             onSubmit={this.submit.bind(this)}>
-//             Search
-//             </button>
-//             </div> 
-//           </div>          
-//         </div>
-//         <div>
-//           <Images />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
-
-
-
-// export default (Layout); 

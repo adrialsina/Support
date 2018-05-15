@@ -12,14 +12,15 @@ class SearchBar extends Component {
   }
 
   handleSearch (e) {
-    console.log(e.target.value);
-    this.setState({ username: e.target.value })
+    console.log("ESCRIC", e.target.value);
+    this.setState({ username: e.target.value });
+    this.props.sendWord(e.target.value);
   }
 
-  handleprova() {
+  // handleprova() {
     
-    this.props.sendWord(this.state.username);
-  }
+  //   this.props.sendWord(this.state.username);
+  // }
   
 
   render () {
@@ -33,11 +34,6 @@ class SearchBar extends Component {
             placeholder='Do your search'
             onChange={this.handleSearch.bind(this)}
             value={this.state.username} />
-            <button
-              type='submit'
-              onClick={this.handleprova.bind(this)}>
-              Search
-            </button>
       </form>
       </div>
     )
